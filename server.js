@@ -1,8 +1,38 @@
 // server.js
 import { serveDir } from "jsr:@std/http/file-server";
 
+// 直前の単語を保持しておく
+let previousWord = "しりとり";
+
 // localhostにDenoのHTTPサーバーを展開
 Deno.serve(async (_req) => {
+    // パス名を取得する
+    // http://localhost:8000/hoge に接続した場合"/hoge"が取得できる
+    const pathname = new URL(_req.url).pathname;
+    console.log(`pathname: ${pathname}`);
+
+    // GET /shiritori: 直前の単語を返す
+    if (_req.method === "GET" && pathname === "/shiritori") {
+        return new Response(previousWord);
+    }
+
+    // POST /shiritori: 次の単語を受け取って保存する
+    if (_req.method === "POST" && pathname === "/shiritori") {
+        // リクエストのペイロードを取得
+        const requestJson = await _req.json();
+        // JSONの中からnextWordを取得
+        const nextWord = requestJson["nextWord"];
+
+        // previousWordの末尾とnextWordの先頭が同一か確認
+        if (previousWord.slice(-1) === nextWord.slice(0, 1)) {
+            // 同一であれば、previousWordを更新
+            previousWord = nextWord;
+        }
+
+        // 現在の単語を返す
+        return new Response(previousWord);
+    }
+
     // ./public以下のファイルを公開
     return serveDir(
         _req,
