@@ -2,7 +2,7 @@
 import { serveDir } from "jsr:@std/http/file-server";
 
 // 直前の単語を保持しておく
-let previousWord = "スタート";
+let previousWord = "しりとり";
 
 // localhostにDenoのHTTPサーバーを展開
 Deno.serve(async (_req) => {
