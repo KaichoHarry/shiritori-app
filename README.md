@@ -28,8 +28,8 @@
 
 本課題をベースに、より実践的なWebアプリケーションとして拡張した「課題解答版」を別途開発しています。
 
-- **GitHubリポジトリ**: [ここに課題解答版のGitHub URL]
-- **デプロイ済URL**: [ここに課題解答版のWebサイトURL]
+- **GitHubリポジトリ**: https://github.com/KaichoHarry/AI-shiritori-app
+- **デプロイ済URL**: https://frontend-production-ebe1.up.railway.app
 
 ### 発展版の技術選定と今後の展望
 
